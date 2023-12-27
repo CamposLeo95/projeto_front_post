@@ -59,6 +59,7 @@ export const CardRegister = ({ isRegister, setIsRegister }: CardLoginProps) => {
                 onClick={handleSubmit}
                 className="bg-blue-400 w-full  p-4 mt-4 rounded-lg text-slate-100 font-extrabold hover:bg-blue-500 text-sm"
             >Cadastrar</button>
+
             <p className="text-slate-400">
                 Já possui conta?
                 <span

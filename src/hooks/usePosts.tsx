@@ -10,7 +10,7 @@ export const usePosts = () => {
 
     const navigate = useNavigate()
 
-    useEffect(() => { getPosts() }, [])
+    useEffect(() => { getPosts() }, [posts])
 
     const getPosts = async () => {
         try {

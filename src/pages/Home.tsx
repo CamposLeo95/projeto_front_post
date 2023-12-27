@@ -1,24 +1,23 @@
 import { CardPosts } from "../components/CardPosts"
-
-import { usePosts } from "../hooks/usePosts"
+import { NewPost } from "../components/NewPost"
 
 import rickImage from "../assets/rick.jpg"
 
+import { usePosts } from "../hooks/usePosts"
 import { useUser } from "../hooks/useUser"
+import { useState } from "react"
 
 
 export const Home = () => {
+    const [isModal, setIsModal] = useState(false)
 
     const { posts } = usePosts()
-
-
     const user = useUser()
-
-
 
     return (
         <>
-            {/* <Header /> */}
+            {isModal && <NewPost isModal={isModal} setIsModal={setIsModal} />}
+
             <div className="w-screen flex">
                 <div className="flex justify-center w-80 bg-white shadow-md fixed ">
                     <div className="flex flex-col items-center gap-4  p-8  h-screen w-full relative">
@@ -50,11 +49,10 @@ export const Home = () => {
                             ? <div
                                 className="p-2 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer"
                             >
-                                <p>Criar Poste</p>
+                                <span onClick={() => setIsModal(!isModal)}>Criar Poste</span>
                             </div> :
                             ""
                         }
-
                         <div className="p-2  w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
                             <p>Editar dados</p>
                         </div>

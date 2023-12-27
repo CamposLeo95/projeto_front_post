@@ -55,11 +55,11 @@ export const CardLogin = ({ isRegister, setIsRegister }: CardLoginProps) => {
     }
     return (
         <form className=" w-80 p-8 flex flex-col justify-center items-center gap-16 bg-slate-50">
-            <div className="flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="email" className="text-blue-400">Email</label>
                 <input type="email" id="email" ref={emailRef} className="p-3 outline-none rounded-md text-blue-400 border-b-4 border-blue-400" />
             </div>
-            <div className="flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="pass" className="text-blue-400">Senha</label>
                 <input type="password" id="pass" ref={passwordRef} className="p-3 outline-none rounded-md text-blue-400 border-b-4 border-blue-400" />
             </div>
