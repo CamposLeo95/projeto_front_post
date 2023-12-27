@@ -39,7 +39,7 @@ export const CardPosts = ({ id, title, content, userName }: CardPostsProps) => {
             <div className='flex justify-between'>
                 <div className='flex gap-3 justify-center items-center'>
                     <div className='w-5 cursor-pointer' onClick={handleLike}>
-                        {like ? <Heart className='text-red-600 text-sm' /> : <Heart />}
+                        {like ? <Heart className='text-green-500 text-sm' /> : <Heart />}
                     </div>
                     <div className='w-5 cursor-pointer' onClick={() => handleRemovePost(id)}>
                         <Trash2 />

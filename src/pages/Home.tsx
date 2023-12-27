@@ -61,9 +61,9 @@ export const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className=" w-full  bg-slate-100  ml-80 min-h-screen ">
+                <div className=" w-full  bg-gray-900  ml-80 min-h-screen ">
                     <div className="w-full my-6 flex 1 flex-col-reverse justify-center items-center gap-3">
-                        {posts && posts.map((post) => (
+                        {posts && posts?.length > 0 ? posts.map((post) => (
                             <CardPosts
                                 key={post.id}
                                 id={post.id}
@@ -71,7 +71,9 @@ export const Home = () => {
                                 content={post.content}
                                 userName={post.user.name}
                             />
-                        ))}
+                        ))
+                            : <h3 className="text-white"> Não há posts no Momento!</h3>
+                        }
                     </div>
                 </div>
 
