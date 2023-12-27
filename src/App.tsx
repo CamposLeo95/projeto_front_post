@@ -1,17 +1,14 @@
 import { RouterProvider } from "react-router-dom"
-
 import { router } from './routes/routes'
-import { Header } from "./components/Header"
-
-
+import { UserProvider } from "./Context/UserContext"
 
 function App() {
 
-
   return (
     <>
-    <Header />
-      <RouterProvider router={router} />
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
     </>
   )
 }
