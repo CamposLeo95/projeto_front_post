@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { CardPosts } from "../components/CardPosts"
 import { NewPost } from "../components/NewPost"
 
@@ -5,14 +7,16 @@ import rickImage from "../assets/rick.jpg"
 
 import { usePosts } from "../hooks/usePosts"
 import { useUser } from "../hooks/useUser"
-import { useState } from "react"
+
+import { useParams } from "react-router-dom"
 
 
-export const Home = () => {
+export const User = () => {
     const [isModal, setIsModal] = useState(false)
+    const { id } = useParams()
 
     const { posts } = usePosts()
-    const user = useUser()
+    const user = useUser(Number(id))
 
     return (
         <>

@@ -1,27 +1,14 @@
-import { useEffect, useState, useContext } from "react"
+import { useEffect, useState } from "react"
 import { instance } from "../config/axiosConfig"
-
-import { User } from "../Context/UserContext"
 
 import { userProps } from "../interfaces/interfaces"
 
-
-export const useUser = () => {
+export const useUser = (idUser: number) => {
     const [user, setUser] = useState<userProps>()
 
-    const userContext = useContext(User)
-
     useEffect(() => {
-
-        getUser(userId)
-
+        getUser(idUser)
     }, [])
-
-
-    if (!userContext) { return null }
-
-    const { userId } = userContext
-
 
     const getUser = async (userId: number | undefined) => {
         try {

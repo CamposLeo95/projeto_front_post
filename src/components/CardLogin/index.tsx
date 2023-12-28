@@ -4,9 +4,6 @@ import { instance } from "../../config/axiosConfig"
 
 import { useNavigate } from "react-router-dom"
 
-import { useContext } from "react"
-import { User } from "../../Context/UserContext"
-
 type CardLoginProps = {
     isRegister: boolean
     setIsRegister: React.Dispatch<React.SetStateAction<boolean>>
@@ -18,12 +15,6 @@ export const CardLogin = ({ isRegister, setIsRegister }: CardLoginProps) => {
     const passwordRef = useRef<HTMLInputElement | null>(null)
 
     const navigate = useNavigate()
-    const user = useContext(User)
-
-    if (!user) { return null }
-
-    const { setUserId } = user
-
 
     const handleSubmit: ReactEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
@@ -40,9 +31,8 @@ export const CardLogin = ({ isRegister, setIsRegister }: CardLoginProps) => {
                 const idUser = response.data.id
 
                 localStorage.setItem('token', token)
-                setUserId(Number(idUser))
 
-                return navigate("/home")
+                return navigate(`/user/${idUser}`)
             } else {
                 throw new Error('Resposta inesperado do servidor')
             }
