@@ -8,10 +8,11 @@ interface CardPostsProps {
     title: string
     content: string
     userName: string
+    admin: boolean | undefined
 }
 
 
-export const CardPosts = ({ id, title, content, userName }: CardPostsProps) => {
+export const CardPosts = ({ id, title, content, userName, admin }: CardPostsProps) => {
 
 
     const [like, setLike] = useState<boolean>(false)
@@ -24,9 +25,8 @@ export const CardPosts = ({ id, title, content, userName }: CardPostsProps) => {
     const handleRemovePost = async (id: number) => {
 
         try {
-            const response = await instance.delete(`/posts/${id}`)
+            return await instance.delete(`/posts/${id}`)
 
-            console.log(response.data)
         } catch (error) {
             console.log(error)
         }
@@ -41,9 +41,11 @@ export const CardPosts = ({ id, title, content, userName }: CardPostsProps) => {
                     <div className='w-5 cursor-pointer' onClick={handleLike}>
                         {like ? <Heart className='text-green-500 text-sm' /> : <Heart />}
                     </div>
-                    <div className='w-5 cursor-pointer' onClick={() => handleRemovePost(id)}>
-                        <Trash2 />
-                    </div>
+                    {admin &&
+                        <div className='w-5 cursor-pointer' onClick={() => handleRemovePost(id)}>
+                            <Trash2 />
+                        </div>}
+
                 </div>
                 <span className="text-slate-500 font-light text-sm self-end">{userName}</span>
             </div>

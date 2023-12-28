@@ -8,8 +8,7 @@ import rickImage from "../assets/rick.jpg"
 import { usePosts } from "../hooks/usePosts"
 import { useUser } from "../hooks/useUser"
 
-import { useParams } from "react-router-dom"
-
+import { useParams, useNavigate } from "react-router-dom"
 
 export const User = () => {
     const [isModal, setIsModal] = useState(false)
@@ -17,6 +16,15 @@ export const User = () => {
 
     const { posts } = usePosts()
     const user = useUser(Number(id))
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+
+        localStorage.removeItem('token')
+
+        navigate('/login')
+    }
 
     return (
         <>
@@ -26,6 +34,7 @@ export const User = () => {
                 <div className="flex justify-center w-80 bg-white shadow-md fixed ">
                     <div className="flex flex-col items-center gap-4  p-8  h-screen w-full relative">
                         {/* --------------Image-------------- */}
+
                         <div
                             className="w-24 h-24 rounded-xl overflow-hidden flex justify-center bg-white border-4 mb-8 rounded-bl-none rounded-br-none"
                         >
@@ -60,7 +69,10 @@ export const User = () => {
                         <div className="p-2  w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
                             <p>Editar dados</p>
                         </div>
-                        <div className="p-2  w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
+                        <div
+                            className="p-2  w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer"
+                            onClick={handleLogout}
+                        >
                             <p>Sair</p>
                         </div>
                     </div>
@@ -74,6 +86,7 @@ export const User = () => {
                                 title={post.title}
                                 content={post.content}
                                 userName={post.user.name}
+                                admin={user?.admin}
                             />
                         ))
                             : <h3 className="text-white"> Não há posts no Momento!</h3>
