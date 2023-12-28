@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { FilePlus, KeyRound, LogOut, PenSquare, UserRound } from 'lucide-react'
 
 import { CardPosts } from "../components/CardPosts"
 import { NewPost } from "../components/NewPost"
@@ -9,6 +10,8 @@ import { usePosts } from "../hooks/usePosts"
 import { useUser } from "../hooks/useUser"
 
 import { useParams, useNavigate } from "react-router-dom"
+
+// import { handleCreatePost } from "../utils/ServicesPost"
 
 export const User = () => {
     const [isModal, setIsModal] = useState(false)
@@ -33,47 +36,48 @@ export const User = () => {
             <div className="w-screen flex">
                 <div className="flex justify-center w-80 bg-white shadow-md fixed ">
                     <div className="flex flex-col items-center gap-4  p-8  h-screen w-full relative">
-                        {/* --------------Image-------------- */}
 
+                        {/* --------------Image-------------- */}
                         <div
-                            className="w-24 h-24 rounded-xl overflow-hidden flex justify-center bg-white border-4 mb-8 rounded-bl-none rounded-br-none"
+                            className="w-24 h-24 rounded-xl overflow-hidden flex justify-center bg-white border-4 border-blue-400 mb-8 rounded-bl-none rounded-br-none"
                         >
                             <img src={rickImage} className="w-12" alt="" />
-                            <span className="absolute bg-slate-200 px-3 rounded-tl-none rounded-tr-none rounded-md text-white top-[125px] font-normal w-[96px] text-center">
+                            <span className="absolute bg-blue-400 px-3 rounded-tl-none rounded-tr-none rounded-md text-white top-[125px] font-normal w-[96px] text-center">
                                 {user?.admin ? "Admin" : "User"}
                             </span>
                         </div>
+
                         {/* --------------divider-------------- */}
-                        <div className="border-t-2 w-full border-slate-200"></div>
+                        <div className="border-t-2 p-2 w-full border-slate-200"></div>
 
                         {/* --------------User Info-------------- */}
-
-                        <div className="p-2  w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
-                            <p>{user?.name}</p>
+                        <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
+                            <UserRound />
+                            <span className="flex-1">{user?.name}</span>
                         </div>
-                        <div className="p-2  w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
-                            <p>Permissões</p>
+
+                        <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
+                            <KeyRound />
+                            <span className="flex-1">Permissões</span>
                         </div>
 
                         {/* --------------divider-------------- */}
-                        <div className="border-t-2 w-full border-slate-200"></div>
+                        <div className="border-t-2 p-2 w-full border-slate-200"></div>
 
                         {user?.admin
-                            ? <div
-                                className="p-2 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer"
-                            >
-                                <span onClick={() => setIsModal(!isModal)}>Criar Poste</span>
+                            ? <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
+                                <FilePlus />
+                                <span className="flex-1" onClick={() => setIsModal(!isModal)}>Criar Poste</span>
                             </div> :
                             ""
                         }
-                        <div className="p-2  w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
-                            <p>Editar dados</p>
+                        <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
+                            <PenSquare />
+                            <span className="flex-1">Editar dados</span>
                         </div>
-                        <div
-                            className="p-2  w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer"
-                            onClick={handleLogout}
-                        >
-                            <p>Sair</p>
+                        <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer" onClick={handleLogout}>
+                            <LogOut />
+                            <span className="flex-1">Sair</span>
                         </div>
                     </div>
                 </div>

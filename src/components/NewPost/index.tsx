@@ -4,11 +4,24 @@ import { instance } from "../../config/axiosConfig"
 interface NewPostProps {
     isModal: boolean
     setIsModal: React.Dispatch<React.SetStateAction<boolean>>
+    // handlePost: (
+    //     event?: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined,
+    //     title?: string,
+    //     content?: string,
+    //     setIsModal?: React.Dispatch<React.SetStateAction<boolean>>,
+    //     isModal?: boolean) => Promise<void>
 }
 export const NewPost = ({ isModal, setIsModal }: NewPostProps) => {
     const titleRef = useRef<HTMLInputElement | null>(null)
     const contentRef = useRef<HTMLTextAreaElement | null>(null)
+    const containerRef = useRef<HTMLDivElement | null>(null)
 
+    // const title = titleRef.current?.value
+    // const content = titleRef.current?.value
+
+    const closeModal: ReactEventHandler<HTMLDivElement> = (event) => {
+        event.target === containerRef.current && setIsModal(!isModal)
+    }
 
     const handlePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
@@ -26,14 +39,17 @@ export const NewPost = ({ isModal, setIsModal }: NewPostProps) => {
             console.log(response.data)
             setIsModal(!isModal)
 
-
         } catch (error) {
             throw new Error('Error ao criar post')
         }
     }
+
     return (
-        <div className="bg-opacity-65 bg-slate-600  w-screen h-screen flex justify-center items-center fixed z-10">
-            <form className=" w-2/5 h-4/5 bg-white p-9 flex flex-col gap-6 shadow-md rounded-md">
+        <div
+            className="bg-opacity-65 bg-slate-600  w-screen h-screen flex justify-center items-center fixed z-10" ref={containerRef}
+            onClick={closeModal}
+        >
+            <form className=" w-2/5 h-4/5 bg-white p-9 flex flex-col gap-6 shadow-md rounded-md min-w-96">
                 <div className="flex flex-col">
                     <label htmlFor="">Titulo</label>
                     <input type="text" className="p-4 bg-slate-100" ref={titleRef} />
