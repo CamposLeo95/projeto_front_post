@@ -4,26 +4,38 @@ import { instance } from "../../config/axiosConfig"
 interface NewPostProps {
     isModal: boolean
     setIsModal: React.Dispatch<React.SetStateAction<boolean>>
-    // handlePost: (
-    //     event?: React.MouseEvent<HTMLButtonElement, MouseEvent> | undefined,
-    //     title?: string,
-    //     content?: string,
-    //     setIsModal?: React.Dispatch<React.SetStateAction<boolean>>,
-    //     isModal?: boolean) => Promise<void>
 }
-export const NewPost = ({ isModal, setIsModal }: NewPostProps) => {
+export const ModalPost = ({ isModal, setIsModal }: NewPostProps) => {
     const titleRef = useRef<HTMLInputElement | null>(null)
     const contentRef = useRef<HTMLTextAreaElement | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null)
-
-    // const title = titleRef.current?.value
-    // const content = titleRef.current?.value
 
     const closeModal: ReactEventHandler<HTMLDivElement> = (event) => {
         event.target === containerRef.current && setIsModal(!isModal)
     }
 
-    const handlePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
+    // const handleEditPost: ReactEventHandler<HTMLButtonElement> = async (event) => {
+    //     event.preventDefault()
+    //     const title = titleRef.current?.value
+    //     const content = contentRef.current?.value
+
+    //     if (!title || !content) {
+    //         alert('Por favor preencha todos os campos')
+    //         return
+    //     }
+
+    //     try {
+    //         const response = await instance.post(`posts/${id}`, { title, content })
+
+    //         console.log(response.data)
+    //         setIsModal(!isModal)
+
+    //     } catch (error) {
+    //         throw new Error('Error ao criar post')
+    //     }
+    // }
+
+    const handleCreatePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
         const title = titleRef.current?.value
         const content = contentRef.current?.value
@@ -61,7 +73,7 @@ export const NewPost = ({ isModal, setIsModal }: NewPostProps) => {
                 <button
                     type="submit"
                     className="w-full bg-blue-400 hover:bg-blue-500 p-3 rounded-md text-white"
-                    onClick={handlePost}
+                    onClick={handleCreatePost}
                 >Postar</button>
                 <button
                     type="submit"

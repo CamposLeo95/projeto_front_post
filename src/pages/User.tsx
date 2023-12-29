@@ -2,7 +2,7 @@ import { useState } from "react"
 import { FilePlus, KeyRound, LogOut, PenSquare, UserRound } from 'lucide-react'
 
 import { CardPosts } from "../components/CardPosts"
-import { NewPost } from "../components/NewPost"
+import { ModalPost } from "../components/ModalPost"
 
 import rickImage from "../assets/rick.jpg"
 
@@ -10,8 +10,6 @@ import { usePosts } from "../hooks/usePosts"
 import { useUser } from "../hooks/useUser"
 
 import { useParams, useNavigate } from "react-router-dom"
-
-// import { handleCreatePost } from "../utils/ServicesPost"
 
 export const User = () => {
     const [isModal, setIsModal] = useState(false)
@@ -31,7 +29,7 @@ export const User = () => {
 
     return (
         <>
-            {isModal && <NewPost isModal={isModal} setIsModal={setIsModal} />}
+            {isModal && <ModalPost isModal={isModal} setIsModal={setIsModal} />}
 
             <div className="w-screen flex">
                 <div className="flex justify-center w-80 bg-white shadow-md fixed ">

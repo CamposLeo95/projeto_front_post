@@ -23,7 +23,7 @@ export const CardPosts = ({ id, title, content, userName, admin }: CardPostsProp
     const handleEditPost = async (id: number) => {
 
         try {
-            return id
+            console.log(id)
 
         } catch (error) {
             console.log(error)
