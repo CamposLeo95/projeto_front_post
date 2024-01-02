@@ -1,24 +1,56 @@
-import { FilePlus, KeyRound, LogOut, PenSquare, UserRound } from 'lucide-react'
+import { FilePlus, KeyRound, LogOut, PenSquare, UserRound, ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { CardPosts } from "../components/CardPosts"
 import { ModalPost } from "../components/ModalPost"
 
-import rickImage from "../assets/rick.jpg"
+import rickImage from "../assets/rick.png"
+import mortyImage from "../assets/morty.png"
 
 import { usePosts } from "../hooks/usePosts"
 import { useUser } from "../hooks/useUser"
 
 import { useParams, useNavigate } from "react-router-dom"
-import { useContext } from 'react'
+
+import { useContext, useEffect, useState } from 'react'
 import { ModalContext } from '../contexts/ModalContext'
+import { postProps } from '../interfaces/interfaces'
 
 export const User = () => {
     const { id } = useParams()
+
     const { posts } = usePosts()
     const user = useUser(Number(id))
 
-    const modalContext = useContext(ModalContext)
+    const [newPosts, setNewPosts] = useState<postProps[]>()
+    const [start, setStart] = useState<number>(0)
+    const [end, setEnd] = useState<number>(3)
+    const [page, setPage] = useState<number>(1)
 
+    useEffect(() => { posts && setNewPosts(posts.slice(start, end)) }, [posts, end, start])
+
+    const handlePrevSlice = (num: number) => {
+        if (start < 0) {
+            setStart(0)
+            setEnd(3)
+        } else {
+            setStart(start - num)
+            setEnd(end - num)
+            setPage(page - 1)
+        }
+    }
+
+    const handleNextSlice = (num: number) => {
+        if (posts && end >= posts?.length) {
+            setStart(start)
+            setEnd(end)
+        } else {
+            setStart(start + num)
+            setEnd(end + num)
+            setPage(page + 1)
+        }
+    }
+
+    const modalContext = useContext(ModalContext)
     const navigate = useNavigate()
 
     const handleLogout = () => {
@@ -26,19 +58,16 @@ export const User = () => {
         navigate('/login')
     }
 
-    if (!modalContext) {
-        return
-    }
-
     const createPost = () => {
         modalContext?.setReq("post")
         modalContext?.setIsModal(!modalContext.isModal)
         modalContext?.setUrl("/posts")
+        modalContext?.setButtonText("Criar Poste")
     }
 
     return (
         <>
-            {modalContext.isModal && <ModalPost />}
+            {modalContext?.isModal && <ModalPost />}
 
             <div className="w-screen flex">
                 <div className="flex justify-center w-80 bg-white shadow-md fixed ">
@@ -48,7 +77,10 @@ export const User = () => {
                         <div
                             className="w-24 h-24 rounded-xl overflow-hidden flex justify-center bg-white border-4 border-blue-400 mb-8 rounded-bl-none rounded-br-none"
                         >
-                            <img src={rickImage} className="w-12" alt="" />
+                            {user?.admin
+                                ? <img src={rickImage} className="w-full" alt="" />
+                                : <img src={mortyImage} className="w-full" alt="" />
+                            }
                             <span className="absolute bg-blue-400 px-3 rounded-tl-none rounded-tr-none rounded-md text-white top-[125px] font-normal w-[96px] text-center">
                                 {user?.admin ? "Admin" : "User"}
                             </span>
@@ -77,8 +109,7 @@ export const User = () => {
                                 <span className="flex-1" onClick={createPost}>
                                     Criar Poste
                                 </span>
-                            </div> :
-                            ""
+                            </div> : null
                         }
                         <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
                             <PenSquare />
@@ -90,9 +121,9 @@ export const User = () => {
                         </div>
                     </div>
                 </div>
-                <div className=" w-full  bg-gray-900  ml-80 min-h-screen ">
-                    <div className="w-full my-6 flex 1 flex-col-reverse justify-center items-center gap-3">
-                        {posts && posts?.length > 0 ? posts.map((post) => (
+                <div className=" w-full  bg-blue-400 ml-80 min-h-screen pb-4">
+                    <div className="w-full my-5 flex 1 flex-col-reverse justify-center items-center gap-3">
+                        {newPosts && newPosts?.length > 0 ? newPosts.map((post) => (
                             <CardPosts
                                 key={post.id}
                                 id={post.id}
@@ -105,9 +136,21 @@ export const User = () => {
                             : <h3 className="text-white"> Não há posts no Momento!</h3>
                         }
                     </div>
+                    <div className='w-full flex gap-4 bottom-0 py-3 justify-center'>
+
+                        {start > 0
+                            ? <button className='text-white' onClick={() => handlePrevSlice(3)}><ArrowLeft /></button>
+                            : <button className='text-slate-300 cursor-auto'><ArrowLeft /></button>
+                        }
+                        <span className='text-white cursor-auto'>{page}</span>
+                        {posts && end < posts?.length
+                            ? <button className='text-white' onClick={() => handleNextSlice(3)}><ArrowRight /></button>
+                            : <button className='text-slate-300 cursor-auto' ><ArrowRight /></button>
+                        }
+                    </div>
                 </div>
 
-            </div>
+            </div >
         </>
     )
 }

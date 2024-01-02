@@ -9,9 +9,7 @@ export const ModalPost = () => {
 
     const modalContext = useContext(ModalContext)
 
-    if (!modalContext) {
-        return
-    }
+    if (!modalContext) { return }
 
     const closeModal: ReactEventHandler<HTMLDivElement> = (event) => {
         if (modalContext.setIsModal)
@@ -33,6 +31,7 @@ export const ModalPost = () => {
                 case "post": await instance.post(modalContext.url, { title, content })
                     break
                 case "put": await instance.put(modalContext.url, { title, content })
+                    break
             }
             modalContext.setIsModal(!modalContext.isModal)
 
@@ -60,7 +59,7 @@ export const ModalPost = () => {
                     className="w-full bg-blue-400 hover:bg-blue-500 p-3 rounded-md text-white"
                     onClick={handlePost}
                 >
-                    Postar
+                    {modalContext.buttonText}
                 </button>
                 <button
                     type="submit"

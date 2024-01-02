@@ -6,7 +6,10 @@ type contextProps = {
     setUrl: React.Dispatch<React.SetStateAction<string>>
     req: string
     setReq: React.Dispatch<React.SetStateAction<string>>
+    buttonText: string
+    setButtonText: React.Dispatch<React.SetStateAction<string>>
 }
+
 export const ModalContext = createContext<contextProps | undefined>(undefined)
 
 
