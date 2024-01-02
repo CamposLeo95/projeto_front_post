@@ -21,10 +21,7 @@ export const CardRegister = ({ isRegister, setIsRegister }: CardLoginProps) => {
         const senha = passwordRef.current?.value
 
         try {
-            const response = await instance.post('users', { name, email, senha })
-
-            console.log(response.data)
-
+            await instance.post('users', { name, email, senha })
             setIsRegister(!isRegister)
 
         } catch (error) {
@@ -33,7 +30,7 @@ export const CardRegister = ({ isRegister, setIsRegister }: CardLoginProps) => {
         }
     }
     return (
-        <form className=" w-80 p-8 flex flex-col justify-center items-center gap-2 bg-slate-50">
+        <form className=" w-80 p-8 flex flex-col justify-center items-center gap-2 bg-slate-200">
             <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="name" className="text-blue-400">Nome</label>
                 <input type="text" id="name" ref={nameRef} className="p-3 outline-none rounded-md text-blue-400 border-b-2 border-blue-400" />

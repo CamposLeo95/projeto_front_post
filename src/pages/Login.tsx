@@ -1,6 +1,4 @@
 
-import { ContainerCenter } from "../layouts/ContainerCenter"
-
 import welcomeImage from '../assets/welcome.jpg'
 
 import { CardLogin } from "../components/CardLogin"
@@ -12,7 +10,7 @@ export const Login = () => {
     const [isRegister, setIsRegister] = useState(true)
 
     return (
-        <ContainerCenter>
+        <div className="w-full h-screen flex justify-center items-center bg-gray-950">
             <div className="w-4/5 flex justify-center">
                 <div className="flex justify-center w-1/2">
                     <img className="" src={welcomeImage} alt="welcome" />
@@ -21,6 +19,6 @@ export const Login = () => {
                     ? <CardLogin isRegister={isRegister} setIsRegister={setIsRegister} />
                     : <CardRegister isRegister={isRegister} setIsRegister={setIsRegister} />}
             </div>
-        </ContainerCenter>
+        </div>
     )
 }

@@ -44,7 +44,7 @@ export const CardLogin = ({ isRegister, setIsRegister }: CardLoginProps) => {
         }
     }
     return (
-        <form className=" w-80 p-8 flex flex-col justify-center items-center gap-16 bg-slate-50">
+        <form className=" w-80 p-8 flex flex-col justify-center items-center gap-16 bg-slate-200">
             <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="email" className="text-blue-400">Email</label>
                 <input type="email" id="email" ref={emailRef} className="p-3 outline-none rounded-md text-blue-400 border-b-4 border-blue-400" />
@@ -56,7 +56,7 @@ export const CardLogin = ({ isRegister, setIsRegister }: CardLoginProps) => {
             <button
                 type="submit"
                 onClick={handleSubmit}
-                className="bg-blue-400 w-full p-4 rounded-lg text-slate-100 font-extrabold hover:bg-blue-500 text-sm"
+                className="bg-blue-400 w-full p-4 rounded-lg text-slate-100 font-bold hover:bg-blue-500 text-sm"
             >Entrar</button>
             <p className="text-slate-400">
                 Não possui conta?
