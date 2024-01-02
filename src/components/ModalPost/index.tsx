@@ -1,41 +1,24 @@
-import { ReactEventHandler, useRef } from "react"
+import { ReactEventHandler, useContext, useRef } from "react"
 import { instance } from "../../config/axiosConfig"
+import { ModalContext } from "../../contexts/ModalContext"
 
-interface NewPostProps {
-    isModal: boolean
-    setIsModal: React.Dispatch<React.SetStateAction<boolean>>
-}
-export const ModalPost = ({ isModal, setIsModal }: NewPostProps) => {
+export const ModalPost = () => {
     const titleRef = useRef<HTMLInputElement | null>(null)
     const contentRef = useRef<HTMLTextAreaElement | null>(null)
     const containerRef = useRef<HTMLDivElement | null>(null)
 
-    const closeModal: ReactEventHandler<HTMLDivElement> = (event) => {
-        event.target === containerRef.current && setIsModal(!isModal)
+    const modalContext = useContext(ModalContext)
+
+    if (!modalContext) {
+        return
     }
 
-    // const handleEditPost: ReactEventHandler<HTMLButtonElement> = async (event) => {
-    //     event.preventDefault()
-    //     const title = titleRef.current?.value
-    //     const content = contentRef.current?.value
+    const closeModal: ReactEventHandler<HTMLDivElement> = (event) => {
+        if (modalContext.setIsModal)
+            event.target === containerRef.current && modalContext.setIsModal(!modalContext.isModal)
+    }
 
-    //     if (!title || !content) {
-    //         alert('Por favor preencha todos os campos')
-    //         return
-    //     }
-
-    //     try {
-    //         const response = await instance.post(`posts/${id}`, { title, content })
-
-    //         console.log(response.data)
-    //         setIsModal(!isModal)
-
-    //     } catch (error) {
-    //         throw new Error('Error ao criar post')
-    //     }
-    // }
-
-    const handleCreatePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
+    const handlePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
         const title = titleRef.current?.value
         const content = contentRef.current?.value
@@ -46,10 +29,12 @@ export const ModalPost = ({ isModal, setIsModal }: NewPostProps) => {
         }
 
         try {
-            const response = await instance.post('posts', { title, content })
-
-            console.log(response.data)
-            setIsModal(!isModal)
+            switch (modalContext.req) {
+                case "post": await instance.post(modalContext.url, { title, content })
+                    break
+                case "put": await instance.put(modalContext.url, { title, content })
+            }
+            modalContext.setIsModal(!modalContext.isModal)
 
         } catch (error) {
             throw new Error('Error ao criar post')
@@ -73,12 +58,14 @@ export const ModalPost = ({ isModal, setIsModal }: NewPostProps) => {
                 <button
                     type="submit"
                     className="w-full bg-blue-400 hover:bg-blue-500 p-3 rounded-md text-white"
-                    onClick={handleCreatePost}
-                >Postar</button>
+                    onClick={handlePost}
+                >
+                    Postar
+                </button>
                 <button
                     type="submit"
                     className="w-full bg-gray-400 hover:bg-gray-500 p-3 rounded-md text-white"
-                    onClick={() => setIsModal(!isModal)}
+                    onClick={() => modalContext.setIsModal(!modalContext.isModal)}
                 >Cancelar</button>
             </form>
         </div>

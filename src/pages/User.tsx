@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { FilePlus, KeyRound, LogOut, PenSquare, UserRound } from 'lucide-react'
 
 import { CardPosts } from "../components/CardPosts"
@@ -10,26 +9,36 @@ import { usePosts } from "../hooks/usePosts"
 import { useUser } from "../hooks/useUser"
 
 import { useParams, useNavigate } from "react-router-dom"
+import { useContext } from 'react'
+import { ModalContext } from '../contexts/ModalContext'
 
 export const User = () => {
-    const [isModal, setIsModal] = useState(false)
     const { id } = useParams()
-
     const { posts } = usePosts()
     const user = useUser(Number(id))
+
+    const modalContext = useContext(ModalContext)
 
     const navigate = useNavigate()
 
     const handleLogout = () => {
-
         localStorage.removeItem('token')
-
         navigate('/login')
+    }
+
+    if (!modalContext) {
+        return
+    }
+
+    const createPost = () => {
+        modalContext?.setReq("post")
+        modalContext?.setIsModal(!modalContext.isModal)
+        modalContext?.setUrl("/posts")
     }
 
     return (
         <>
-            {isModal && <ModalPost isModal={isModal} setIsModal={setIsModal} />}
+            {modalContext.isModal && <ModalPost />}
 
             <div className="w-screen flex">
                 <div className="flex justify-center w-80 bg-white shadow-md fixed ">
@@ -65,7 +74,9 @@ export const User = () => {
                         {user?.admin
                             ? <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
                                 <FilePlus />
-                                <span className="flex-1" onClick={() => setIsModal(!isModal)}>Criar Poste</span>
+                                <span className="flex-1" onClick={createPost}>
+                                    Criar Poste
+                                </span>
                             </div> :
                             ""
                         }
