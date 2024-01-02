@@ -1,4 +1,5 @@
 import { createContext } from "react";
+
 type contextProps = {
     isModal: boolean
     setIsModal: React.Dispatch<React.SetStateAction<boolean>>
