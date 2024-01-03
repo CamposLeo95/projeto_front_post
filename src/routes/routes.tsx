@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 
 import { Login } from "../pages/Login"
 import { User } from "../pages/User"
+
 export default function AppRoutes() {
     return (
         <Routes>

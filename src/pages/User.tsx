@@ -6,8 +6,8 @@ import { FilePlus, KeyRound, LogOut, PenSquare, UserRound, ArrowLeft, ArrowRight
 
 import { CardPosts } from "../components/CardPosts"
 import { ModalContainer } from '../components/ModalContainer'
-import { ModalPost } from '../components/ModalPost'
-import { ModalUser } from '../components/ModalUser'
+import { CardModalPostes } from '../components/CardModalPostes'
+import { CardModalUsers } from '../components/CardModalUsers'
 
 import rickImage from "../assets/rick.png"
 import mortyImage from "../assets/morty.png"
@@ -20,47 +20,50 @@ import { useParams, useNavigate } from "react-router-dom"
 import { postProps } from '../interfaces/interfaces'
 
 export const User = () => {
+    // Params
     const { id } = useParams()
 
+    // Hooks
     const { posts } = usePosts()
     const user = useUser(Number(id))
 
+    // UseState
     const [newPosts, setNewPosts] = useState<postProps[]>()
     const [start, setStart] = useState<number>(0)
     const [end, setEnd] = useState<number>(3)
     const [page, setPage] = useState<number>(1)
 
+    // Context
+    const modalContext = useContext(ModalContext)
+
+    // Navigate
+    const navigate = useNavigate()
+
     useEffect(() => { posts && setNewPosts(posts.slice(start, end)) }, [posts, end, start])
 
-    const handlePrevSlice = (num: number) => {
+    const handlePrevSlice = (numerador: number) => {
         if (start < 0) {
             setStart(0)
             setEnd(3)
         } else {
-            setStart(start - num)
-            setEnd(end - num)
+            setStart(start - numerador)
+            setEnd(end - numerador)
             setPage(page - 1)
         }
     }
 
-    const handleNextSlice = (num: number) => {
+    const handleNextSlice = (numerador: number) => {
         if (posts && end >= posts?.length) {
             setStart(start)
             setEnd(end)
         } else {
-            setStart(start + num)
-            setEnd(end + num)
+            setStart(start + numerador)
+            setEnd(end + numerador)
             setPage(page + 1)
         }
     }
 
-    const modalContext = useContext(ModalContext)
-    const navigate = useNavigate()
-
-    const handleLogout = () => {
-        localStorage.removeItem('token')
-        navigate('/login')
-    }
+    const handleLogout = () => { localStorage.removeItem('token'), navigate('/login') }
 
     const createPost = () => {
         modalContext?.setReq("post")
@@ -78,17 +81,16 @@ export const User = () => {
 
     return (
         <>
-            {modalContext?.isModalPost && <ModalContainer><ModalPost /></ModalContainer>}
-            {modalContext?.isModalUser && <ModalContainer><ModalUser /></ModalContainer>}
+            {modalContext?.isModalPost && <ModalContainer><CardModalPostes /></ModalContainer>}
+            {modalContext?.isModalUser && <ModalContainer><CardModalUsers /></ModalContainer>}
 
             <div className="w-screen flex">
                 <div className="flex justify-center w-80 bg-white shadow-md fixed ">
                     <div className="flex flex-col items-center gap-4  p-8  h-screen w-full relative">
 
                         {/* --------------Image-------------- */}
-                        <div
-                            className="w-24 h-24 rounded-xl overflow-hidden flex justify-center bg-white border-4 border-blue-400 mb-8 rounded-bl-none rounded-br-none"
-                        >
+
+                        <div className="w-24 h-24 rounded-xl overflow-hidden flex justify-center bg-white border-4 border-blue-400 mb-8 rounded-bl-none rounded-br-none" >
                             {user?.admin
                                 ? <img src={rickImage} className="w-full" alt="" />
                                 : <img src={mortyImage} className="w-full" alt="" />
@@ -99,9 +101,11 @@ export const User = () => {
                         </div>
 
                         {/* --------------divider-------------- */}
+
                         <div className="border-t-2 p-2 w-full border-slate-200"></div>
 
                         {/* --------------User Info-------------- */}
+
                         <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
                             <UserRound />
                             <span className="flex-1">{user?.name}</span>
@@ -113,21 +117,27 @@ export const User = () => {
                         </div>
 
                         {/* --------------divider-------------- */}
+
                         <div className="border-t-2 p-2 w-full border-slate-200"></div>
 
                         {user?.admin
                             ? <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
                                 <FilePlus />
-                                <span className="flex-1" onClick={createPost}>
-                                    Criar Poste
-                                </span>
-                            </div> : null
+                                <span className="flex-1" onClick={createPost}>  Criar Poste </span>
+                            </div>
+                            : null
                         }
-                        <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer" onClick={editUser}>
+                        <div
+                            className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer"
+                            onClick={editUser}
+                        >
                             <PenSquare />
                             <span className="flex-1">Editar dados</span>
                         </div>
-                        <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer" onClick={handleLogout}>
+                        <div
+                            className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer"
+                            onClick={handleLogout}
+                        >
                             <LogOut />
                             <span className="flex-1">Sair</span>
                         </div>
@@ -149,7 +159,6 @@ export const User = () => {
                         }
                     </div>
                     <div className='w-full flex gap-4 bottom-0 py-3 justify-center'>
-
                         {start > 0
                             ? <button className='text-white' onClick={() => handlePrevSlice(3)}><ArrowLeft /></button>
                             : <button className='text-slate-300 cursor-auto'><ArrowLeft /></button>
@@ -161,7 +170,6 @@ export const User = () => {
                         }
                     </div>
                 </div>
-
             </div >
         </>
     )

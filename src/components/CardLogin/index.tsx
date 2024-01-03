@@ -13,7 +13,6 @@ export const CardLogin = ({ isRegister, setIsRegister }: CardLoginProps) => {
 
     const emailRef = useRef<HTMLInputElement | null>(null)
     const passwordRef = useRef<HTMLInputElement | null>(null)
-
     const navigate = useNavigate()
 
     const handleSubmit: ReactEventHandler<HTMLButtonElement> = async (event) => {
@@ -24,25 +23,15 @@ export const CardLogin = ({ isRegister, setIsRegister }: CardLoginProps) => {
 
         try {
             const response = await instance.post('login', { email, senha })
-
-            if (response.status === 200 && response.data.token) {
-
-                const token = response.data.token
-                const idUser = response.data.id
-
-                localStorage.setItem('token', token)
-
-                return navigate(`/user/${idUser}`)
-            } else {
-                throw new Error('Resposta inesperado do servidor')
-            }
-
+            response.status === 200 && localStorage.setItem('token', response.data.token)
+            return navigate(`/user/${response.data.id}`)
 
         } catch (error) {
             alert('Usuario não encontrado!')
             console.log("error ao realizar login", error)
         }
     }
+
     return (
         <form className=" w-80 p-8 flex flex-col justify-center items-center gap-16 bg-slate-200">
             <div className="flex flex-col gap-2 w-full">

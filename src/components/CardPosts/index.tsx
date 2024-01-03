@@ -16,10 +16,6 @@ export const CardPosts = ({ id, title, content, userName, admin }: CardPostsProp
 
     const modalContext = useContext(ModalContext)
 
-    const handleLike = () => {
-        setLike(!like)
-    }
-
     const handleRemovePost = async (id: number) => {
         try {
             return await instance.delete(`/posts/${id}`)
@@ -42,7 +38,7 @@ export const CardPosts = ({ id, title, content, userName, admin }: CardPostsProp
                 <p>{content}</p>
                 <div className='flex justify-between'>
                     <div className='flex gap-3 justify-center items-center'>
-                        <div className='w-5 cursor-pointer' onClick={handleLike}>
+                        <div className='w-5 cursor-pointer' onClick={() => setLike(!like)}>
                             {like ? <ThumbsUp className='text-blue-500 w-5 ' /> : <ThumbsUp className='w-5 text-slate-400' />}
                         </div>
                         {admin &&

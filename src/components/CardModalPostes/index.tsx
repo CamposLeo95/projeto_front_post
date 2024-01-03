@@ -2,7 +2,8 @@ import { ReactEventHandler, useContext, useRef } from "react"
 import { instance } from "../../config/axiosConfig"
 import { ModalContext } from "../../contexts/ModalContext"
 
-export const ModalPost = () => {
+export const CardModalPostes = () => {
+
     const titleRef = useRef<HTMLInputElement | null>(null)
     const contentRef = useRef<HTMLTextAreaElement | null>(null)
 
@@ -12,13 +13,11 @@ export const ModalPost = () => {
 
     const handlePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
+
         const title = titleRef.current?.value
         const content = contentRef.current?.value
 
-        if (!title || !content) {
-            alert('Por favor preencha todos os campos')
-            return
-        }
+        !title || !content && alert('Por favor preencha todos os campos')
 
         try {
             switch (modalContext.req) {
@@ -28,7 +27,6 @@ export const ModalPost = () => {
                     break
             }
             modalContext.setIsModalPost(!modalContext.isModalPost)
-
         } catch (error) {
             throw new Error('Error ao criar post')
         }
@@ -55,7 +53,9 @@ export const ModalPost = () => {
                 type="submit"
                 className="w-full bg-gray-400 hover:bg-gray-500 p-3 rounded-md text-white"
                 onClick={() => modalContext.setIsModalPost(!modalContext.isModalPost)}
-            >Cancelar</button>
+            >
+                Cancelar
+            </button>
         </form>
 
     )
