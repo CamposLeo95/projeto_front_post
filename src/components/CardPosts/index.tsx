@@ -31,7 +31,7 @@ export const CardPosts = ({ id, title, content, userName, admin }: CardPostsProp
     const handleEditPost = (id: number) => {
         modalContext?.setReq("put")
         modalContext?.setUrl(`/posts/${id}`)
-        modalContext?.setIsModal(!modalContext.isModal)
+        modalContext?.setIsModalPost(!modalContext.isModalPost)
         modalContext?.setButtonText("Editar Poste")
     }
 

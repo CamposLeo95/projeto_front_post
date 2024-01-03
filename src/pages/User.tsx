@@ -1,7 +1,13 @@
+import { useContext, useEffect, useState } from 'react'
+
+import { ModalContext } from '../contexts/ModalContext'
+
 import { FilePlus, KeyRound, LogOut, PenSquare, UserRound, ArrowLeft, ArrowRight } from 'lucide-react'
 
 import { CardPosts } from "../components/CardPosts"
-import { ModalPost } from "../components/ModalPost"
+import { ModalContainer } from '../components/ModalContainer'
+import { ModalPost } from '../components/ModalPost'
+import { ModalUser } from '../components/ModalUser'
 
 import rickImage from "../assets/rick.png"
 import mortyImage from "../assets/morty.png"
@@ -11,8 +17,6 @@ import { useUser } from "../hooks/useUser"
 
 import { useParams, useNavigate } from "react-router-dom"
 
-import { useContext, useEffect, useState } from 'react'
-import { ModalContext } from '../contexts/ModalContext'
 import { postProps } from '../interfaces/interfaces'
 
 export const User = () => {
@@ -60,14 +64,22 @@ export const User = () => {
 
     const createPost = () => {
         modalContext?.setReq("post")
-        modalContext?.setIsModal(!modalContext.isModal)
+        modalContext?.setIsModalPost(!modalContext.isModalPost)
         modalContext?.setUrl("/posts")
         modalContext?.setButtonText("Criar Poste")
     }
 
+    const editUser = () => {
+        modalContext?.setReq("put")
+        modalContext?.setIsModalUser(!modalContext.isModalUser)
+        modalContext?.setUrl(`/users/${id}`)
+        modalContext?.setButtonText("Editar Usuario")
+    }
+
     return (
         <>
-            {modalContext?.isModal && <ModalPost />}
+            {modalContext?.isModalPost && <ModalContainer><ModalPost /></ModalContainer>}
+            {modalContext?.isModalUser && <ModalContainer><ModalUser /></ModalContainer>}
 
             <div className="w-screen flex">
                 <div className="flex justify-center w-80 bg-white shadow-md fixed ">
@@ -111,7 +123,7 @@ export const User = () => {
                                 </span>
                             </div> : null
                         }
-                        <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
+                        <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer" onClick={editUser}>
                             <PenSquare />
                             <span className="flex-1">Editar dados</span>
                         </div>

@@ -1,8 +1,10 @@
 import { createContext } from "react";
 
 type contextProps = {
-    isModal: boolean
-    setIsModal: React.Dispatch<React.SetStateAction<boolean>>
+    isModalPost: boolean
+    setIsModalPost: React.Dispatch<React.SetStateAction<boolean>>
+    isModalUser: boolean
+    setIsModalUser: React.Dispatch<React.SetStateAction<boolean>>
     url: string
     setUrl: React.Dispatch<React.SetStateAction<string>>
     req: string
@@ -12,6 +14,3 @@ type contextProps = {
 }
 
 export const ModalContext = createContext<contextProps | undefined>(undefined)
-
-
-
