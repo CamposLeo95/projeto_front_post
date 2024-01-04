@@ -6,7 +6,6 @@ Esta é a parte frontend do projeto desenvolvido baseado em um mural de comunica
 
 - [Requisitos](#requisitos)
 - [Instalação](#instalação)
-- [Configuração](#configuração)
 - [Executando o projeto](#executando-o-projeto)
 - [Imagens do projeto](#imagens-do-projeto)
 
