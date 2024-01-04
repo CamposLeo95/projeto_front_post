@@ -64,10 +64,14 @@ Logo em seguida o programa irá abrir um servidor http://localhost:5173/ clique 
 
 ## Imagens do projeto 
 <img width="800px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/4d70dbef-2651-40f7-8dd4-cabad3ef2d26"/>
-<div>
-  <img width="500px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/64212440-e94c-49fc-b472-c0f191df190c"/>
-  <img width="500px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/347f046b-98cf-4772-848c-3e04f78b3b3c"/>
-</div>
+
+---
+
+<img width="800px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/64212440-e94c-49fc-b472-c0f191df190c"/>
+
+---
+<img width="800px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/347f046b-98cf-4772-848c-3e04f78b3b3c"/>
+
   
 
 
