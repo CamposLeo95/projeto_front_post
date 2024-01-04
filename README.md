@@ -8,7 +8,6 @@ Esta é a parte frontend do projeto desenvolvido baseado em um mural de comunica
 - [Instalação](#instalação)
 - [Configuração](#configuração)
 - [Executando o projeto](#executando-o-projeto)
-- [Endpoints/API](#endpointsapi)
 
 ## Requisitos
 
