@@ -63,7 +63,7 @@ export const User = () => {
         }
     }
 
-    const handleLogout = () => { localStorage.removeItem('token'), navigate('/login') }
+    const handleLogout = () => { localStorage.removeItem('token'), navigate('/') }
 
     const createPost = () => {
         modalContext?.setReq("post")

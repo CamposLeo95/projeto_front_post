@@ -1,30 +1,67 @@
-# React + TypeScript + Vite
+# Postes - BackEnd
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esta é a parte frontend do projeto desenvolvido baseado em um mural de comunicados. Visando implementar um sistema que permita a criação de usuarios administrativos ou não, que com base em seus respectivos acessos podem criar, alterar ou até mesmo deletar um poste.
 
-Currently, two official plugins are available:
+## Índice
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Requisitos](#requisitos)
+- [Instalação](#instalação)
+- [Configuração](#configuração)
+- [Executando o projeto](#executando-o-projeto)
+- [Endpoints/API](#endpointsapi)
 
-## Expanding the ESLint configuration
+## Requisitos
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- [x] node - 18.16.0
+- [x] npm - 9.5.1
+- [x] Prisma - 5.7.1
+- [x] Projeto Backend rodando (https://github.com/CamposLeo95/projeto_back_post/tree/main)
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+## Instalação 
+
+Faça o clone do repositório 
+
+```bash
+git clone https://github.com/CamposLeo95/projeto_front_post.git
+
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Depois acesse a a pasta atraves do prompt 
+
+```bash
+cd projeto_front_post
+
+```
+E rode o comando yarn para instalar as dependencias 
+
+```bash
+yarn 
+
+```
+
+## Executando o projeto
+
+Para executar o projeto é necessario que você esteja dentro da pasta e utilize o comando yarn dev, isso iniciará o servidor
+
+
+```bash
+yarn dev
+
+```
+
+Logo em seguida o programa irá abrir um servidor http://localhost:5173/ clique e será redirecionado para a pagina de login
+
+
+## Desafios
+
+- 1º Utilizar o tailwind, fiz o uso dessa lib para a estilização do projeto.
+
+- 2º react-router-dom para a manipulação das rotas variando entre a rota de login em que o usuario irá se cadastrar ou logar e a de users que será apresentado os postes e todas as permissões e dados dos usuarios
+
+- 3º Uso do axios, me ajudou com as configurações das requisições permitindo inserir uma rota padrão de requisição, a inserção do token recuperado do backend nos headers para conseguir acessar as rotas de postes e a manipulação de requisições em geral para acesso aos dados da API 
+
+- Uso do context API para poder manipular o estado global do modal. criando uma forma de abrir e fecha-lo e tambem manipular o componente que apareceria dentro desto, para o caso de editar o poste, criar um poste ou editar um usuario.
+
+## Imagens do projeto 
+
