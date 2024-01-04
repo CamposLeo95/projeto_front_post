@@ -1,4 +1,4 @@
-# Postes - BackEnd
+# Postes - FrontEnd
 
 Esta é a parte frontend do projeto desenvolvido baseado em um mural de comunicados. Visando implementar um sistema que permita a criação de usuarios administrativos ou não, que com base em seus respectivos acessos podem criar, alterar ou até mesmo deletar um poste.
 
@@ -64,4 +64,12 @@ Logo em seguida o programa irá abrir um servidor http://localhost:5173/ clique 
 - Uso do context API para poder manipular o estado global do modal. criando uma forma de abrir e fecha-lo e tambem manipular o componente que apareceria dentro desto, para o caso de editar o poste, criar um poste ou editar um usuario.
 
 ## Imagens do projeto 
+<img width="800px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/4d70dbef-2651-40f7-8dd4-cabad3ef2d26"/>
+<div>
+  <img width="500px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/64212440-e94c-49fc-b472-c0f191df190c"/>
+  <img width="500px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/347f046b-98cf-4772-848c-3e04f78b3b3c"/>
+</div>
+  
+
+
 
