@@ -3,6 +3,7 @@ import { Trash2, ThumbsUp, Pencil } from 'lucide-react'
 import { instance } from '../../config/axiosConfig'
 import { ModalContext } from '../../contexts/ModalContext'
 
+
 interface CardPostsProps {
     id: number
     title: string
@@ -41,7 +42,7 @@ export const CardPosts = ({ id, title, content, userName, admin }: CardPostsProp
                         <div className='w-5 cursor-pointer' onClick={() => setLike(!like)}>
                             {like ? <ThumbsUp className='text-blue-500 w-5 ' /> : <ThumbsUp className='w-5 text-slate-400' />}
                         </div>
-                        {admin &&
+                        {admin && 
                             <>
                                 <div className=' cursor-pointer ' onClick={() => handleEditPost(id)}>
                                     <Pencil className='w-5 text-slate-400' />
