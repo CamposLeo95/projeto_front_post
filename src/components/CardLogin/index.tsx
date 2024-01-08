@@ -48,7 +48,7 @@ export const CardLogin = ({ isRegister, setIsRegister }: CardLoginProps) => {
                 className="bg-blue-400 w-full p-4 rounded-lg text-slate-100 font-bold hover:bg-blue-500 text-sm"
             >Entrar</button>
             <p className="text-slate-400">
-                Não possui conta?
+                <span>Não possui conta? </span>
                 <span
                     className="hover:text-blue-400 cursor-pointer"
                     onClick={() => setIsRegister(!isRegister)}

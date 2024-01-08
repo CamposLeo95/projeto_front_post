@@ -1,4 +1,4 @@
-# Postes - BackEnd
+# Postes - FrontEnd
 
 Esta é a parte frontend do projeto desenvolvido baseado em um mural de comunicados. Visando implementar um sistema que permita a criação de usuarios administrativos ou não, que com base em seus respectivos acessos podem criar, alterar ou até mesmo deletar um poste.
 
@@ -6,9 +6,8 @@ Esta é a parte frontend do projeto desenvolvido baseado em um mural de comunica
 
 - [Requisitos](#requisitos)
 - [Instalação](#instalação)
-- [Configuração](#configuração)
 - [Executando o projeto](#executando-o-projeto)
-- [Endpoints/API](#endpointsapi)
+- [Imagens do projeto](#imagens-do-projeto)
 
 ## Requisitos
 
@@ -64,4 +63,20 @@ Logo em seguida o programa irá abrir um servidor http://localhost:5173/ clique 
 - Uso do context API para poder manipular o estado global do modal. criando uma forma de abrir e fecha-lo e tambem manipular o componente que apareceria dentro desto, para o caso de editar o poste, criar um poste ou editar um usuario.
 
 ## Imagens do projeto 
+
+<img width="490px" src="https://github.com/CamposLeo95/next-login/assets/98062615/9ce4b6e3-39ff-414d-9151-6d1b333193ae"/>
+<img width="500px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/4d70dbef-2651-40f7-8dd4-cabad3ef2d26"/>
+
+---
+<img width="800px" src="https://github.com/CamposLeo95/next-login/assets/98062615/23c5fb2b-fa2e-4e54-96e9-331e34ea08c0"/>
+
+---
+<img width="800px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/64212440-e94c-49fc-b472-c0f191df190c"/>
+
+---
+<img width="800px" src="https://github.com/CamposLeo95/projeto_idNutrition/assets/98062615/347f046b-98cf-4772-848c-3e04f78b3b3c"/>
+
+  
+
+
 
