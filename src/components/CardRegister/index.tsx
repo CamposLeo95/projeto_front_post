@@ -49,10 +49,10 @@ export const CardRegister = ({ isRegister, setIsRegister }: CardLoginProps) => {
                 <input type="password" id="pass" ref={passwordRef} className="p-3 outline-none rounded-md text-blue-400 border-b-2 border-blue-400" />
             </div>
 
-            <div className="flex flex-col gap-2 w-full">
+            {/* <div className="flex flex-col gap-2 w-full">
                 <label htmlFor="confirmPass" className="text-blue-400">Confirmar senha</label>
                 <input type="password" id="confirmPass" className="p-3 outline-none rounded-md text-blue-400 border-b-2 border-blue-400" />
-            </div>
+            </div> */}
 
             {/* ------------------- Actions ------------------------- */}
 

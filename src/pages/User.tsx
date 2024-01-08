@@ -19,6 +19,7 @@ import { useParams, useNavigate } from "react-router-dom"
 
 import { postProps } from '../interfaces/interfaces'
 import NavContext from '../contexts/NavContext'
+import { CardModalPermissions } from '../components/CardModalPermissions'
 
 export const User = () => {
     // Params
@@ -88,6 +89,10 @@ export const User = () => {
         <>
             {modalContext?.isModalPost && <ModalContainer><CardModalPostes /></ModalContainer>}
             {modalContext?.isModalUser && <ModalContainer><CardModalUsers /></ModalContainer>}
+            {modalContext?.isModalPermission
+            && <ModalContainer><CardModalPermissions admin={user?.admin}/></ModalContainer>
+            }
+
 
             <div className="w-screen flex bg-slate-800">
                 {navContext?.isNav
@@ -124,8 +129,11 @@ export const User = () => {
                         <span className="flex-1">{user?.name}</span>
                     </div>
 
-                    <div className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer">
-                        <KeyRound />
+                    <div 
+                        className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer"
+                        onClick={() => modalContext?.setIsModalPermission(!modalContext.isModalPermission)}
+                    >
+                        <KeyRound/>
                         <span className="flex-1">Permissões</span>
                     </div>
 

@@ -5,6 +5,8 @@ type contextProps = {
     setIsModalPost: React.Dispatch<React.SetStateAction<boolean>>
     isModalUser: boolean
     setIsModalUser: React.Dispatch<React.SetStateAction<boolean>>
+    isModalPermission: boolean
+    setIsModalPermission: React.Dispatch<React.SetStateAction<boolean>>
     url: string
     setUrl: React.Dispatch<React.SetStateAction<string>>
     req: string
