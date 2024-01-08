@@ -13,7 +13,7 @@ export const Login = () => {
         <div className="w-full h-screen flex justify-center items-center bg-gray-950">
             <div className="w-4/5 flex justify-center">
                 <div className="flex justify-center w-1/2">
-                    <img className="" src={welcomeImage} alt="welcome" />
+                    <img className="hidden sm:block" src={welcomeImage} alt="welcome" />
                 </div>
                 {isRegister
                     ? <CardLogin isRegister={isRegister} setIsRegister={setIsRegister} />

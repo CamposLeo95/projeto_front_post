@@ -34,12 +34,9 @@ export const User = () => {
     const [end, setEnd] = useState<number>(3)
     const [page, setPage] = useState<number>(1)
 
-    const navContext = useContext(NavContext)
-
-    
-
     // Context
     const modalContext = useContext(ModalContext)
+    const navContext = useContext(NavContext)
 
     // Navigate
     const navigate = useNavigate()
@@ -148,7 +145,7 @@ export const User = () => {
                         <span className="flex-1">Editar dados</span>
                     </div>
                     <div
-                        className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500"
+                        className="px-4 py-2 flex justify-between items-center gap-4 w-full rounded-md text-center text-slate-400 hover:bg-slate-200 hover:text-slate-500 cursor-pointer"
                         onClick={handleLogout}
                     >
                         <LogOut />
@@ -181,11 +178,12 @@ export const User = () => {
                         {newPosts && newPosts?.length > 0 ? newPosts.map((post) => (
                             <CardPosts
                                 key={post.id}
-                                id={post.id}
+                                idPoste={post.id}
                                 title={post.title}
                                 content={post.content}
                                 userName={post.user.name}
                                 admin={user?.admin}
+                                userId={post.user.id}
                             />
                         ))
                             : <h3 className="text-white"> Não há posts no Momento!</h3>
