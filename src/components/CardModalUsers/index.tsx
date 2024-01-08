@@ -1,12 +1,15 @@
 import { ReactEventHandler, useContext, useRef } from "react"
 import { ModalContext } from "../../contexts/ModalContext"
 import { instance } from "../../config/axiosConfig"
+import NavContext from "../../contexts/NavContext"
 
 export const CardModalUsers = () => {
     const nameRef = useRef<HTMLInputElement | null>(null)
     const senhaRef = useRef<HTMLInputElement | null>(null)
 
     const modalContext = useContext(ModalContext)
+    const navContext = useContext(NavContext)
+
 
     const handlePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
@@ -22,13 +25,16 @@ export const CardModalUsers = () => {
                     break
             }
             modalContext?.setIsModalUser(!modalContext.isModalUser)
+            if (window.innerWidth < 768) {
+                navContext?.setIsNav(false);
+             }
         } catch (error) {
             throw new Error('Error ao criar post')
         }
     }
 
     return (
-        <form className=" w-2/5 h-4/5 bg-white p-9 flex flex-col gap-6 shadow-md rounded-md min-w-96 z-20">
+        <form className=" w-2/5 h-auto bg-white p-9 flex flex-col gap-6 shadow-md rounded-md min-w-96 z-20">
             <div className="flex flex-col">
                 <label htmlFor="nome">Nome</label>
                 <input type="text" className="p-4 bg-slate-100" ref={nameRef} name="nome" />
