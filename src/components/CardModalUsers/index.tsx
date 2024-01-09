@@ -11,6 +11,7 @@ export const CardModalUsers = () => {
     const navContext = useContext(NavContext)
 
 
+
     const handlePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
 
@@ -42,7 +43,7 @@ export const CardModalUsers = () => {
 
             <div className="flex flex-col">
                 <label htmlFor="senha">Senha</label>
-                <input type="text" className="p-4 bg-slate-100" ref={senhaRef} name="senha" />
+                <input type="password" className="p-4 bg-slate-100" ref={senhaRef} name="senha" />
             </div>
             <button
                 type="submit"

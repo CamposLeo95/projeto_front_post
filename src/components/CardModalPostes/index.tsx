@@ -1,23 +1,30 @@
-import { ReactEventHandler, useContext, useRef } from "react"
+import { ReactEventHandler, useContext} from "react"
 import { instance } from "../../config/axiosConfig"
 import { ModalContext } from "../../contexts/ModalContext"
 import NavContext from "../../contexts/NavContext"
 
 export const CardModalPostes = () => {
-
-    const titleRef = useRef<HTMLInputElement | null>(null)
-    const contentRef = useRef<HTMLTextAreaElement | null>(null)
-
     const modalContext = useContext(ModalContext)
     const navContext = useContext(NavContext)
 
+    const title = modalContext?.titleText
+    const content= modalContext?.contentText
+
     if (!modalContext) { return }
+
+    const handleTitleChange = ( event: React.ChangeEvent<HTMLInputElement>) => {
+        const newTitle = event.target.value;
+        modalContext?.setTitleText(newTitle);
+    
+    };
+
+    const handleContentChange = ( event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        const newContent = event.target.value;
+        modalContext?.setContentText(newContent);
+    };
 
     const handlePost: ReactEventHandler<HTMLButtonElement> = async (event) => {
         event.preventDefault()
-
-        const title = titleRef.current?.value
-        const content = contentRef.current?.value
 
         !title || !content && alert('Por favor preencha todos os campos')
 
@@ -38,14 +45,27 @@ export const CardModalPostes = () => {
     }
 
     return (
-        <form className=" w-2/5 h-auto bg-white p-9 flex flex-col gap-6 shadow-md rounded-md min-w-96 z-20">
+        <form 
+            className=" w-2/5 h-auto bg-white p-9 flex flex-col gap-6 shadow-md rounded-md min-w-96 z-20"
+        >
             <div className="flex flex-col">
                 <label htmlFor="">Titulo</label>
-                <input type="text" className="p-4 bg-slate-100" ref={titleRef} />
+                <input 
+                    type="text" 
+                    className="p-4 bg-slate-100" 
+                    value={modalContext.titleText} 
+                    onChange={handleTitleChange}
+                />
             </div>
             <div className="flex flex-col">
-                <label htmlFor="">Conteudo</label>
-                <textarea className="p-4 bg-slate-100 resize-none h-40" ref={contentRef} />
+                <label htmlFor="">
+                    Conteudo
+                </label>
+                <textarea 
+                    className="p-4 bg-slate-100 resize-none h-40" 
+                    value={modalContext.contentText}
+                    onChange={(e) => handleContentChange(e)}
+                />
             </div>
             <button
                 type="submit"

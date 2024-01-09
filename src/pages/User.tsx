@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 
 import { ModalContext } from '../contexts/ModalContext'
+import NavContext from '../contexts/NavContext'
 
 import { FilePlus, KeyRound, LogOut, PenSquare, UserRound, ArrowLeft, ArrowRight, X, Menu, MessageSquarePlus } from 'lucide-react'
 
@@ -8,9 +9,11 @@ import { CardPosts } from "../components/CardPosts"
 import { ModalContainer } from '../components/ModalContainer'
 import { CardModalPostes } from '../components/CardModalPostes'
 import { CardModalUsers } from '../components/CardModalUsers'
+import { CardModalPermissions } from '../components/CardModalPermissions'
 
 import rickImage from "../assets/rick.png"
 import mortyImage from "../assets/morty.png"
+import joiaImage from "../assets/joia.png"
 
 import { usePosts } from "../hooks/usePosts"
 import { useUser } from "../hooks/useUser"
@@ -18,8 +21,7 @@ import { useUser } from "../hooks/useUser"
 import { useParams, useNavigate } from "react-router-dom"
 
 import { postProps } from '../interfaces/interfaces'
-import NavContext from '../contexts/NavContext'
-import { CardModalPermissions } from '../components/CardModalPermissions'
+import { CardModalNotice } from '../components/CardModalNotice'
 
 export const User = () => {
     // Params
@@ -42,7 +44,18 @@ export const User = () => {
     // Navigate
     const navigate = useNavigate()
 
-    useEffect(() => { posts && setNewPosts(posts.slice(start, end)) }, [posts, end, start])
+    //Contents
+    const noticeContents = [
+        'Olá! Meu nome é Leonardo e este é um projeto fullstack que desenvolvi utilizando React, Node e TypeScript.',
+        'Construi me baseando em um ambiente de avisos para que os usuarios tenham a possibilidade de criar editar ou apagar postes baseando-se em suas permissões',
+        'Vamos lá! crie um poste tambem! E deixe seu feedback sobre ou uma mensagem qualquer. Ficarei feliz em ler, um grande abraço!'
+
+    ]
+
+    useEffect(() => { 
+        posts && 
+        setNewPosts(posts.reverse().slice(start, end)) 
+        }, [posts, end, start])
 
     const handlePrevSlice = (numerador: number) => {
         if (start < 0) {
@@ -88,7 +101,18 @@ export const User = () => {
     return (
         <>
             {modalContext?.isModalPost && <ModalContainer><CardModalPostes /></ModalContainer>}
+
             {modalContext?.isModalUser && <ModalContainer><CardModalUsers /></ModalContainer>}
+
+            {modalContext?.isModalNotice
+                && <ModalContainer>
+                     <CardModalNotice 
+                        img={joiaImage} 
+                        title='Seja Bem vindo' 
+                        contents={noticeContents}/>
+                    </ModalContainer>
+            }
+
             {modalContext?.isModalPermission
             && <ModalContainer><CardModalPermissions admin={user?.admin}/></ModalContainer>
             }
@@ -182,7 +206,7 @@ export const User = () => {
 
                 </div>
                     
-                    <div className="w-full my-5 flex 1 flex-col-reverse justify-center items-center gap-3 ">
+                    <div className="w-full my-5 flex 1 flex-col justify-center items-center gap-3 ">
                         {newPosts && newPosts?.length > 0 ? newPosts.map((post) => (
                             <CardPosts
                                 key={post.id}

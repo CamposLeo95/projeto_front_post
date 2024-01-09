@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { Trash2, ThumbsUp, Pencil } from 'lucide-react'
 import { instance } from '../../config/axiosConfig'
 import { ModalContext } from '../../contexts/ModalContext'
@@ -22,16 +22,8 @@ export const CardPosts = ({ idPoste, title, content, userName, admin, userId }: 
 
     const { id } = useParams()
 
-    // const teste = false
-
-    // const handleUser = async () => {
-
-    //     try {
-    //         return await instance.get(`/posts`)
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
+    const titleRef = useRef<HTMLHeadingElement>(null)
+    const contentRef = useRef<HTMLParagraphElement>(null)
 
     const handleRemovePost = async (idPoste: number) => {
         try {
@@ -46,13 +38,17 @@ export const CardPosts = ({ idPoste, title, content, userName, admin, userId }: 
         modalContext?.setUrl(`/posts/${idPoste}`)
         modalContext?.setIsModalPost(!modalContext.isModalPost)
         modalContext?.setButtonText("Editar Poste")
+        modalContext?.setTitleText((titleRef.current?.innerText || ''))
+        modalContext?.setContentText((contentRef.current?.innerText || ''))
     }
 
     return (
         <>
             <div key={idPoste} className="w-4/5 py-8 px-12 bg-white flex flex-col gap-6 rounded-sm shadow-md">
-                <h3 className="font-bold">{title.toUpperCase()}</h3>
-                <p>{content}</p>
+                <h3 className="font-bold" ref={titleRef}>
+                    {title.toUpperCase()}
+                </h3>
+                <p ref={contentRef}>{content}</p>
                 <div className='flex justify-between'>
                     <div className='flex gap-3 justify-center items-center'>
                         <div className='w-5 cursor-pointer' onClick={() => setLike(!like)}>
