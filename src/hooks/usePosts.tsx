@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 import { postProps } from "../interfaces/interfaces"
 import { useNavigate } from "react-router-dom"
 
-
 export const usePosts = () => {
     const [posts, setPosts] = useState<postProps[]>()
 
