@@ -20,6 +20,9 @@ export const ModalContainer = ({ children }: ModalContainerProps) => {
 
         modalContext?.isModalPermission
         && event.target === containerRef.current && modalContext.setIsModalPermission(false)
+
+        modalContext?.isModalNotice
+        && event.target === containerRef.current && modalContext.setIsModalNotice(false)
     }
 
     return (
