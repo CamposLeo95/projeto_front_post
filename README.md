@@ -1,6 +1,6 @@
-# Postes - FrontEnd
+# Rede Social - FrontEnd
 
-Esta é a parte frontend do projeto desenvolvido baseado em um mural de comunicados. Visando implementar um sistema que permita a criação de usuarios administrativos ou não, que com base em seus respectivos acessos podem criar, alterar ou até mesmo deletar um poste.
+Esta é a parte frontend do projeto desenvolvido de uma rede Social. Visando implementar um sistema que permita a criação de usuarios administrativos ou não, que com base em seus respectivos acessos podem criar, alterar ou até mesmo deletar postagens.
 
 ## Índice
 
@@ -56,11 +56,11 @@ Logo em seguida o programa irá abrir um servidor http://localhost:5173/ clique 
 
 - 1º Utilizar o tailwind, fiz o uso dessa lib para a estilização do projeto.
 
-- 2º react-router-dom para a manipulação das rotas variando entre a rota de login em que o usuario irá se cadastrar ou logar e a de users que será apresentado os postes e todas as permissões e dados dos usuarios
+- 2º react-router-dom para a manipulação das rotas variando entre a rota de login em que o usuario irá se cadastrar ou logar e a de users que será apresentado os posts e todas as permissões e dados dos usuarios
 
 - 3º Uso do axios, me ajudou com as configurações das requisições permitindo inserir uma rota padrão de requisição, a inserção do token recuperado do backend nos headers para conseguir acessar as rotas de postes e a manipulação de requisições em geral para acesso aos dados da API 
 
-- Uso do context API para poder manipular o estado global do modal. criando uma forma de abrir e fecha-lo e tambem manipular o componente que apareceria dentro desto, para o caso de editar o poste, criar um poste ou editar um usuario.
+- Uso do context API para poder manipular o estado global do modal. criando uma forma de abrir e fecha-lo e tambem manipular o componente que apareceria dentro desto, para o caso de editar o post, criar um poste ou editar um usuario.
 
 ## Imagens do projeto 
 
